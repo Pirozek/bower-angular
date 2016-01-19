@@ -4411,6 +4411,10 @@ function createInjector(modulesToLoad, strictDi) {
   instanceInjector.strictDi = strictDi;
   forEach(runBlocks, function(fn) { if (fn) instanceInjector.invoke(fn); });
 
+  instanceInjector.loadNewModules = function (mods) {
+    forEach(loadModules(mods), function(fn) { instanceInjector.invoke(fn || noop); });
+  };
+
   return instanceInjector;
 
   ////////////////////////////////////
